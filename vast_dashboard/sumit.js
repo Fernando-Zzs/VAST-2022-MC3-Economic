@@ -102,7 +102,6 @@ export function updateLineChart(educationLevel = "") {
       .attr("x", width / 2 + margin.left)
       .attr("y", height + margin.top + 25) 
       .style("font-size", "15px")
-      .text("Time (YYYY-MM)");
 
     const y = d3
       .scaleLinear()

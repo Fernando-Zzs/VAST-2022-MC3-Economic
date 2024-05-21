@@ -37,7 +37,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-const port = 3000; // 指定服务器监听的端口号
+const port = 3001; // 指定服务器监听的端口号
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });

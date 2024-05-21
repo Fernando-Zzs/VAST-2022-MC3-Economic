@@ -95,9 +95,9 @@ Promise.all([
     return 0;
   }),
   //Employer Data
-  d3.csv("./Data/Employers.csv", function (data) {
+  d3.csv("./Data/merged_employer.csv", function (data) {
     let coords = data["location"].match(/([-+]?[\d.]+)\s([-+]?[\d.]+)/);
-    employers.push({ x: +coords[1], y: +coords[2], id: +data["employerId"] });
+    employers.push({ x: +coords[1], y: +coords[2], id: +data["employerId"], diff: +data["difference"] });
     return 0;
   }),
   d3.csv("./Data/Buildings.csv", function (data) {
@@ -765,6 +765,12 @@ function addMapDatatab2() {
     .attr("cy", (d) => mapYScale(d.y))
     .attr("r", zbNodeSize)
     .attr("fill", "red")
+    // .attr("r", (d) => Math.abs(d.diff) + 3) // 修改半径大小
+    // .attr("fill", (d) => {
+    //   if (d.diff > 0) return "rgba(0, 255, 0, 0.5)"; // 绿色，透明度为0.5
+    //   else if (d.diff == 0) return "rgba(0, 0, 255, 0.5)"; // 蓝色，透明度为0.5
+    //   else return "rgba(255, 0, 0, 0.5)"; // 红色，透明度为0.5
+    // }) // 修改颜色
     .style("visibility", "hidden") // Hid so it only shows on tab 2
     .on("mouseover", (event, d) => {
       // Show the tooltip
@@ -1298,7 +1304,7 @@ function createWaterfall(margin) {
     .attr("x", 0 - innerHeight / 2)
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Employee Count"); // update this based on the current selection
+    .text("Change in Employee Count"); // update this based on the current selection
 
   // Add x-axis label
   graph
